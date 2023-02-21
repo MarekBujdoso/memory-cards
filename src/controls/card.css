@@ -1,0 +1,122 @@
+:root {
+  --text-color: rgb(97, 97, 97);
+  --text-color-alpha70: rgba(97, 97, 97, 0.7);
+  --text-color-alpha30: rgba(97, 97, 97, 0.3);
+}
+
+.card {
+  perspective: 400px;
+  max-width: 300px;
+  min-height: 100px;
+  margin-block: 10px 10px;
+  width: 100%;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  min-height: 100px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  /* transition: opacity 1s; */
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* transition: ; */
+}
+
+.card.clicked .content {
+  transform: rotateY(180deg);
+  /* box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); */
+}
+
+/* .card.answered .conten {
+  opacity: 0;
+} */
+
+.back {
+  background: #30acf3;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.answer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input {
+  align-self: stretch;
+  background-color: transparent;
+  margin: 0px 10px;
+  border: 1px solid var(--text-color-alpha30);
+  border-radius: 6px;
+  /* box-shadow: 0 0 10px rgba(0, 162, 255, 0.7); */
+  box-shadow: 0 0 10px var(--text-color-alpha30);
+  color: var(--text-color);
+}
+
+.input.textarea {
+  resize: none;
+  min-height: 40px;
+}
+
+.input:focus-visible {
+  outline-color: gold;
+  outline-style: dotted;
+}
+
+.editable {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.back.editable .input {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  background-color: white;
+}
+
+.cardLabel {
+  margin-left: 10px;
+  color: var(--text-color);
+}
+
+.back.editable .cardLabel {
+  color: white;
+}
+
+.error {
+  color: rgb(251, 147, 102);
+  min-height: 15px;
+  margin-left: 10px;
+  /* line-height: 10px; */
+}
+
+.back .error {
+  color: rgb(255, 198, 189);
+}

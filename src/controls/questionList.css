@@ -1,0 +1,39 @@
+.levelWrapper {
+  max-width: 300px;
+  min-width: 300px;
+  float: left;
+}
+
+.newQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addButton {
+  min-width: 300px;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.saveButton {
+  /* background-color: rgb(113, 198, 255); */
+  margin-bottom: 10px;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  border-radius: 20px;
+  background-color: transparent;
+  /* color: white */
+}
+
+.newCard {
+  max-height: 0px;
+  min-width: 300px;
+  overflow-y: clip;
+  transition: max-height 0.5s linear;
+}
+
+.newCard.visible {
+  max-height: 150px;
+}
