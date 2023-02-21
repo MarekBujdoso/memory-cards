@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import { getLastDayAndDate } from "./dataApi";
+import { BASE_LEVEL } from "./const";
 
 const DAILY_LEVELS = {
   1: [1],
@@ -64,46 +66,39 @@ const DAILY_LEVELS = {
   61: [5, 1],
   62: [4, 2, 1],
   63: [3, 1],
-  64: [2, 1]
+  64: [2, 1],
 };
+
+const DAYS_IN_CYCLE = 64;
 
 export function getLevelsForDay(day) {
   return DAILY_LEVELS[day];
 }
 
-export function storeDay(day) {
-  localStorage.setItem("memory_card_day", day);
-  localStorage.setItem("memory_card_day_date", new Date());
-}
-
-export function saveQuestions(questions) {
-  localStorage.setItem("memroy_card_data", JSON.stringify(questions));
-}
-
-export function loadQuestions() {
-  const jsonQuestions = localStorage.getItem("memroy_card_data");
-  return JSON.parse(jsonQuestions);
-}
-
-export function getCurrentDay() {
-  const storedDay = localStorage.getItem("memory_card_day") || 1;
-  const storedDayDate =
-    localStorage.getItem("memory_card_day_date") || new Date();
+export function calculateCurrentDay(storedDay, storedDayDate) {
   const storedDayDayJS = dayjs(storedDayDate);
   const today = dayjs(new Date()).startOf("day");
   const diff = storedDayDayJS.startOf("day").diff(today, "day");
   if (diff < 0) {
-    return storedDay < 64 ? storedDay + 1 : 1;
+    return storedDay < DAYS_IN_CYCLE ? storedDay + 1 : BASE_LEVEL;
   } else {
     return storedDay;
   }
 }
 
+export function getCurrentDay() {
+  const [storedDay, storedDayDate] = getLastDayAndDate();
+  return calculateCurrentDay(storedDay, storedDayDate);
+}
+
 export function getQuestionsForLevels(questions, levels) {
+  const today = dayjs(new Date()).startOf("day");
   return levels.reduce(
     (lvlQuestions, level) => [
       ...lvlQuestions,
-      ...questions[level].map((q) => ({ ...q, level }))
+      ...questions[level]
+        .filter((q) => !q.answeredDate || dayjs(q.answeredDate) <= today)
+        .map((q) => ({ ...q, level })),
     ],
     []
   );

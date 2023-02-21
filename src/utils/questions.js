@@ -11,6 +11,6 @@ export function moveQuestionToOtherLevel({
   return {
     ...questionsMap,
     [lvlFrom]: questionsMap[lvlFrom].filter((q) => q.id !== questionId),
-    [lvlTo]: [...questionsMap[lvlTo], movedQuestion]
+    [lvlTo]: [...questionsMap[lvlTo], { ...movedQuestion, answeredDate: new Date()}]
   };
 }

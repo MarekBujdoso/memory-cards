@@ -6,10 +6,9 @@ import QuestionsList from "./controls/QuestionList";
 import {
   getCurrentDay,
   getLevelsForDay,
-  loadQuestions,
-  saveQuestions,
-  getQuestionsForLevels
+  getQuestionsForLevels,
 } from "./utils/calculations";
+import { loadQuestions, saveQuestions, storeDay } from "./utils/dataApi";
 
 export default function App() {
   const loadedQuestions = loadQuestions();
@@ -17,6 +16,7 @@ export default function App() {
     loadedQuestions || questions
   );
   const [selectedId, setSelectedId] = useState(null);
+  const currentDay = getCurrentDay();
 
   const handleSelectionChange = (id) => {
     setSelectedId(id);
@@ -27,17 +27,20 @@ export default function App() {
       questionsMap,
       lvlFrom: from,
       lvlTo: to,
-      questionId: id
+      questionId: id,
     });
     setQuestionsMap(newMap);
     saveQuestions(newMap);
+    storeDay(currentDay);
   };
 
   const handleQuestionAdd = (newQuestion) => {
-    setQuestionsMap({ ...questionsMap, 1: [...questionsMap[1], newQuestion] });
+    const newMap = { ...questionsMap, 1: [...questionsMap[1], newQuestion] };
+    setQuestionsMap(newMap);
+    saveQuestions(newMap);
+    storeDay(currentDay);
   };
 
-  const currentDay = getCurrentDay();
   const levels = getLevelsForDay(currentDay);
   const lvlQuestions = getQuestionsForLevels(questionsMap, levels);
   return (
