@@ -97,7 +97,7 @@ export function getQuestionsForLevels(questions, levels) {
     (lvlQuestions, level) => [
       ...lvlQuestions,
       ...questions[level]
-        .filter((q) => !q.answeredDate || dayjs(q.answeredDate) <= today)
+        .filter((q) => level === BASE_LEVEL || !q.answeredDate || dayjs(q.answeredDate) <= today)
         .map((q) => ({ ...q, level })),
     ],
     []
