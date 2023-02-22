@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ThumbUpButton from "./ThumbUpButton";
 import ThumbDownButton from "./ThumbDownButton";
 import "./card.css";
@@ -13,7 +14,7 @@ const Card = ({
   onFrontClick
 }) => {
   const [showAnswerButtons, setShowAnswerButtons] = useState(false);
-  const isTranisitionEnded = isSelected && showAnswerButtons;
+  const isTransitionEnded = isSelected && showAnswerButtons;
 
   function handleBackTurn() {
     setShowAnswerButtons(false);
@@ -36,13 +37,13 @@ const Card = ({
       onTransitionEnd={() => setShowAnswerButtons(isSelected)}
     >
       <div className="content">
-        <div className="front" onClick={onFrontClick}>
+        <button className="front" onClick={onFrontClick}>
           {front}
-        </div>
-        <div className="back" onClick={handleBackTurn}>
+        </button>
+        <button className="back" onClick={handleBackTurn}>
           {back}
-        </div>
-        {isTranisitionEnded && (
+        </button>
+        {isTransitionEnded && (
           <div className="answer">
             <ThumbUpButton onClick={handleCorrect} />
             <ThumbDownButton onClick={handleWrong} />
@@ -51,6 +52,16 @@ const Card = ({
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  back: PropTypes.string.isRequired,
+  front: PropTypes.string.isRequired,
+  onCorrectAnswer: PropTypes.func,
+  onWrongAnswer: PropTypes.func,
+  isSelected: PropTypes.bool,
+  onBackClick: PropTypes.func,
+  onFrontClick: PropTypes.func
 };
 
 export default Card;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./card.css";
 
 const EditableCard = ({ questionObj, onQuestionChange, error = "" }) => {
@@ -39,6 +40,16 @@ const EditableCard = ({ questionObj, onQuestionChange, error = "" }) => {
       </div>
     </div>
   );
+};
+
+EditableCard.propTypes = {
+  questionObj: PropTypes.shape({
+    answer: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired
+  }).isRequired,
+  onQuestionChange: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 export default EditableCard;

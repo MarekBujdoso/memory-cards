@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./questionList.css";
 import EditableCard from "./EditableCard";
 
@@ -50,6 +51,10 @@ const AddQuestion = ({ onQuestionAdd }) => {
       </div>
     </div>
   );
+};
+
+AddQuestion.propTypes = {
+  onQuestionAdd: PropTypes.func.isRequired
 };
 
 export default AddQuestion;
