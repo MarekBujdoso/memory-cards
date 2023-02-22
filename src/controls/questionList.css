@@ -2,6 +2,9 @@
   max-width: 300px;
   min-width: 300px;
   float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .newQuestion {
@@ -32,6 +35,10 @@
   min-width: 300px;
   overflow-y: clip;
   transition: max-height 0.5s linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 .newCard.visible {

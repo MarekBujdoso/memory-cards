@@ -31,20 +31,23 @@ export default function App() {
     });
     setQuestionsMap(newMap);
     saveQuestions(newMap);
-    storeDay(currentDay);
+    const isEverythingAnswered = getQuestionsForLevels(newMap, levels).length === 0;
+    if (isEverythingAnswered) {
+      storeDay(currentDay);
+    }
   };
 
   const handleQuestionAdd = (newQuestion) => {
     const newMap = { ...questionsMap, 1: [...questionsMap[1], newQuestion] };
     setQuestionsMap(newMap);
     saveQuestions(newMap);
-    storeDay(currentDay);
   };
 
   const levels = getLevelsForDay(currentDay);
   const lvlQuestions = getQuestionsForLevels(questionsMap, levels);
   return (
-    <div className="App">
+    <>
+      <span>levels: {levels.toString()} day:{currentDay}</span>
       <QuestionsList
         key={1}
         level={1}
@@ -54,6 +57,6 @@ export default function App() {
         onSelect={handleSelectionChange}
         onQuestionAdd={handleQuestionAdd}
       />
-    </div>
+    </>
   );
 }
