@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Card from "./Card";
+import Card from "./cards/Card";
 import "./questionList.css";
 import { MAX_LEVEL } from "../utils/const";
 import AddQuestion from "./AddQuestion";

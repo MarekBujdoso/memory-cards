@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import ThumbUpButton from "./ThumbUpButton";
-import ThumbDownButton from "./ThumbDownButton";
+import ThumbUpButton from "../buttons/ThumbUpButton";
+import ThumbDownButton from "../buttons/ThumbDownButton";
 import "./card.css";
 
 const Card = ({

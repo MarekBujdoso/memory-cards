@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./questionList.css";
-import EditableCard from "./EditableCard";
+import EditableCard from "./cards/EditableCard";
 
 function getEmptyQuestion() {
   return {
