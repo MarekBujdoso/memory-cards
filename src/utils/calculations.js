@@ -103,3 +103,7 @@ export function getQuestionsForLevels(questions, levels) {
     []
   );
 }
+
+export function exportQuestions(questions) {
+  return JSON.stringify(questions);
+}
