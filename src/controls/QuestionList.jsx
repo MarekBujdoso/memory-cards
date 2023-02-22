@@ -1,17 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Card from "./cards/Card";
-import "./questionList.css";
-import { MAX_LEVEL } from "../utils/const";
-import AddQuestion from "./AddQuestion";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Card from './cards/Card';
+import './questionList.css';
+import { MAX_LEVEL } from '../utils/const';
+import AddQuestion from './AddQuestion';
 
-const QuestionsList = ({
-  lvlQuestions,
-  onQuestionMove,
-  selectedId,
-  onSelect,
-  onQuestionAdd
-}) => {
+const QuestionsList = ({ lvlQuestions, onQuestionMove, selectedId, onSelect, onQuestionAdd }) => {
   return (
     <div className="levelWrapper">
       <h2>Check the cards:</h2>
@@ -35,6 +29,11 @@ const QuestionsList = ({
           onBackClick={() => onSelect(null)}
         />
       ))}
+      {lvlQuestions.length === 0 && (
+        <div>
+          <span>Yuppify, all cards checked :-)</span>
+        </div>
+      )}
       <AddQuestion onQuestionAdd={onQuestionAdd} />
     </div>
   );
