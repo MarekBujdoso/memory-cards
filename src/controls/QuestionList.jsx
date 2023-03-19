@@ -5,11 +5,11 @@ import './questionList.css';
 import { MAX_LEVEL } from '../utils/const';
 import AddQuestion from './AddQuestion';
 
-const QuestionsList = ({ lvlQuestions, onQuestionMove, selectedId, onSelect, onQuestionAdd }) => {
+const QuestionsList = ({ questions, onQuestionMove, selectedId, onSelect, onQuestionAdd }) => {
   return (
     <div className="levelWrapper">
       <h2>Check the cards:</h2>
-      {lvlQuestions.map(({ question, answer, id, level }) => (
+      {questions.map(({ question, answer, id, level }) => (
         <Card
           key={id}
           front={question}
@@ -29,7 +29,7 @@ const QuestionsList = ({ lvlQuestions, onQuestionMove, selectedId, onSelect, onQ
           onBackClick={() => onSelect(null)}
         />
       ))}
-      {lvlQuestions.length === 0 && (
+      {questions.length === 0 && (
         <div>
           <span>Yuppify, all cards checked :-)</span>
         </div>
@@ -40,7 +40,7 @@ const QuestionsList = ({ lvlQuestions, onQuestionMove, selectedId, onSelect, onQ
 };
 
 QuestionsList.propTypes = {
-  lvlQuestions: PropTypes.arrayOf(
+  questions: PropTypes.arrayOf(
     PropTypes.shape({
       question: PropTypes.string.isRequired,
       answer: PropTypes.string.isRequired,
