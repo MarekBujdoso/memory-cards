@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import { questions } from './temp/data';
 import { moveQuestionToOtherLevel } from './utils/questions';
@@ -7,6 +7,20 @@ import { getCurrentDay, getLevelsForDay, getQuestionsForLevels } from './utils/c
 import { loadQuestions, saveQuestions, storeDay } from './utils/dataApi';
 import { db } from './firebase.js';
 import { collection, getDocs } from 'firebase/firestore/lite';
+import { useLoaderData } from "react-router-dom";
+
+export async function loadCards() {
+  const currentDay = getCurrentDay();
+  const cardsCol = collection(db, 'cards');
+  const cardSnapshot = await getDocs(cardsCol);
+  const levels = getLevelsForDay(currentDay);
+  const cardList = cardSnapshot.docs
+    .map((doc) => ({ id: doc.id, ...doc.data() }))
+    .filter((card) => levels.includes(card.level))
+    .sort((a, b) => b.level - a.level);
+  console.log(cardList);
+  return cardList;
+}
 
 export default function App() {
   const loadedQuestions = loadQuestions();
@@ -14,20 +28,8 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   const currentDay = getCurrentDay();
 
-  useEffect(() => {
-    async function loadCards() {
-      const cardsCol = collection(db, 'cards');
-      const cardSnapshot = await getDocs(cardsCol);
-      const levels = getLevelsForDay(currentDay);
-      const cardList = cardSnapshot.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((card) => levels.includes(card.level))
-        .sort((a, b) => b.level - a.level);
-      console.log(cardList, questionsMap);
-      return cardList;
-    }
-    loadCards();
-  }, []);
+  const data = useLoaderData();
+  // console.log('&&&&&DATA&&&&&', data)
 
   const handleSelectionChange = (id) => {
     setSelectedId(id);
