@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from 'firebase/firestore/lite';
 // Follow this pattern to import other Firebase services
@@ -22,8 +23,32 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 // const analytics = getAnalytics(app);
+
+// createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ..
+//   });
+
+// signInWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//   });
 
 // // Get a list of cities from your database
 // async function getCities(db) {
@@ -33,4 +58,4 @@ const db = getFirestore(app);
 //   return cityList;
 // }
 
-export  { db }
+export  { db, auth }
